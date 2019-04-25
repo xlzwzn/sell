@@ -17,10 +17,10 @@ const PORT = process.env.PORT && Number(process.env.PORT)
 const express = require('express')
 const app = express()
 const axios = require('axios')
-// var appData = 'http://guke.39yi.com.cn/sell'
-//var seller = appData.seller
-//var goods = appData.goods
-//var ratings = appData.ratings
+var appData = require('../data.json')
+var seller = appData.seller
+var goods = appData.goods
+var ratings = appData.ratings
 var apiRoutes = express.Router()
 app.use('/api', apiRoutes)
 
@@ -55,45 +55,45 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       poll: config.dev.poll,
   	},
 	  before(app){
-	  	app.get('/api/goods', function(req, res) {
-					var url = 'http://guke.39yi.com.cn/sell/data.json'
-					axios.get(url, {
-						headers: {
-							referer: 'http://guke.39yi.com.cn/',
-							host: 'guke.39yi.com.cn'
-						}
-					}).then((response) => {
-						var ret = response.data
-						if (typeof ret === 'string') {
-							var reg = /{.*}/
-							var matches = ret.match(reg)
-							if (matches) {
-								ret = JSON.parse(matches[0])
-							}
-						}
-						res.json(ret)
-					}).catch((e) => {
-						console.log(e)
-					})
-				})
-//  	app.get('/api/seller', (req, res) => {
-//  		res.json({
-//  			errno: 0,
-//  			data: seller
-//  		})
-//  	}),
-//  	app.get('/api/goods', (req, res) => {
-//  		res.json({
-//  			errno: 0,
-//  			data: goods
-//  		})
-//  	}),
-//  	app.get('/api/ratings', (req,res) => {
-//  		res.json({
-//  			errno: 0,
-//  			data: ratings
-//  		})
-//  	})
+//	  	app.get('/api/goods', function(req, res) {
+//					var url = 'http://guke.39yi.com.cn/sell/data.json'
+//					axios.get(url, {
+//						headers: {
+//							referer: 'http://guke.39yi.com.cn/',
+//							host: 'guke.39yi.com.cn'
+//						}
+//					}).then((response) => {
+//						var ret = response.data
+//						if (typeof ret === 'string') {
+//							var reg = /{.*}/
+//							var matches = ret.match(reg)
+//							if (matches) {
+//								ret = JSON.parse(matches[0])
+//							}
+//						}
+//						res.json(ret)
+//					}).catch((e) => {
+//						console.log(e)
+//					})
+//				})
+    	app.get('/api/seller', (req, res) => {
+    		res.json({
+    			errno: 0,
+    			data: seller
+    		})
+    	}),
+    	app.get('/api/goods', (req, res) => {
+    		res.json({
+    			errno: 0,
+    			data: goods
+    		})
+    	}),
+    	app.get('/api/ratings', (req,res) => {
+    		res.json({
+    			errno: 0,
+    			data: ratings
+    		})
+    	})
   	}
   },
   plugins: [
