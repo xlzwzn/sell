@@ -47,7 +47,7 @@
 	import shopcart from 'components/shopcart/shopcart';
 	import cartcontrol from 'components/cartcontrol/cartcontrol';
 	import food from 'components/food/food';
-	import {goods} from 'common/js/api'
+	// import {goods} from 'common/js/api'
 
   const ERR_OK = 0;
 
@@ -67,17 +67,17 @@
     },
     created() {
       this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
-//    this.$http.get('/api/goods').then((response) => {
-//      response = response.body;
-//      if (response.errno === ERR_OK) {
-//        this.goods = response.data;
-//        this.$nextTick(() => {
-//          this._initScroll();
-//          this._calculateHeight();
-//        });
-//      }
-//    });
-			this._goods()
+      this.$http.get('/api/goods').then((response) => {
+        response = response.body;
+        if (response.errno === ERR_OK) {
+          this.goods = response.data;
+          this.$nextTick(() => {
+            this._initScroll();
+            this._calculateHeight();
+          });
+        }
+      });
+			// this._goods()
     },
     computed: {
       currentIndex() {
@@ -104,15 +104,15 @@
       }
     },
     methods: {
-    	_goods() {
-				goods().then((res) => {
-	  			this.goods = res.goods
-	  		})
-    		this.$nextTick(() => {
-          this._initScroll();
-          this._calculateHeight();
-        });
-    	},
+//  	_goods() {
+//				goods().then((res) => {
+//	  			this.goods = res.goods
+//	  		})
+//  		this.$nextTick(() => {
+//        this._initScroll();
+//        this._calculateHeight();
+//      });
+//  	},
     	cartAdd(el) {
     		this.$nextTick(() => {
     			this.$refs.shopCart.drop(el);
