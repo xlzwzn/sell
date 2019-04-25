@@ -67,7 +67,7 @@
 	import star from 'components/star/star';
 	import split from 'components/split/split';
 	import ratingselect from 'components/ratingselect/ratingselect';
-	import {goods} from 'common/js/api'
+	// import {goods} from 'common/js/api'
 	
 	const ALL = 2;
 	const ERR_OK = 0;
@@ -86,30 +86,30 @@
 			}
 		},
 		created() {
-//			this.$http.get('/api/ratings').then((response) => {
-//				response = response.body;
-//				if (response.errno === ERR_OK) {
-//					this.ratings = response.data;
-//					this.$nextTick(() => {
-//						this.scroll = new BScroll(this.$refs.ratings, {
-//							click: true
-//						});
-//					});
-//				}
-//			});
-			this._goods()
+			this.$http.get('/api/ratings').then((response) => {
+				response = response.body;
+				if (response.errno === ERR_OK) {
+					this.ratings = response.data;
+					this.$nextTick(() => {
+						this.scroll = new BScroll(this.$refs.ratings, {
+							click: true
+						});
+					});
+				}
+			});
+			// this._goods()
 		},
 		methods: {
-			_goods() {
-				goods().then((res) => {
-					this.ratings = res.ratings
-				})
-				this.$nextTick(() => {
-					this.scroll = new BScroll(this.$refs.ratings, {
-						click: true
-					})
-				})
-			},
+//			_goods() {
+//				goods().then((res) => {
+//					this.ratings = res.ratings
+//				})
+//				this.$nextTick(() => {
+//					this.scroll = new BScroll(this.$refs.ratings, {
+//						click: true
+//					})
+//				})
+//			},
 			needShow(type, text) {
 				if (this.onlyContent && !text) {
 					return false;
