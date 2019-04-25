@@ -20,7 +20,7 @@
 
 <script type="text/ecmascript-6">
 import header from 'components/header/header.vue'
-import {goods} from 'common/js/api'
+// import {goods} from 'common/js/api'
 
 const ERR_OK = 0;
 
@@ -31,16 +31,16 @@ export default{
 		};
 	},
 	created() {
-//		this.$http.get('/api/seller').then((response) => {
-//			response = response.body;
-//			if(response.errno === ERR_OK){
-//				this.seller = response.data;
-//				console.log(this.seller);
-//			}
-//		});
-		goods().then((res) => {
-			this.seller = res.seller
-		})
+		this.$http.get('/api/seller').then((response) => {
+			response = response.body;
+			if(response.errno === ERR_OK){
+				this.seller = response.data;
+				console.log(this.seller);
+			}
+		});
+//		goods().then((res) => {
+//			this.seller = res.seller
+//		})
 	},
 	components: {
 		"v-header": header
